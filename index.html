@@ -92,7 +92,7 @@
 
   <!-- Etapa 1: NPS -->
   <div id="s1" class="step">
-    <div class="step-label">Pergunta 1 de 6</div>
+    <div class="step-label">Pergunta 1 de 7</div>
     <div class="step-title">Em uma escala de 0 a 5, o quanto você recomendaria a Talentus para um amigo ou colega?</div>
     <div class="step-sub">0 = Não recomendaria de forma alguma &nbsp;·&nbsp; 5 = Recomendaria com certeza</div>
     <div class="nps-scale">
@@ -113,7 +113,7 @@
 
   <!-- Etapa 2: Vaga -->
   <div id="s2" class="step">
-    <div class="step-label">Pergunta 2 de 6</div>
+    <div class="step-label">Pergunta 2 de 7</div>
     <div class="step-title">A vaga foi preenchida conforme sua expectativa?</div>
     <div class="radio-group">
       <label class="radio-opt" onclick="selectRadio(this)"><input type="radio" name="vaga" value="Sim, superou as expectativas!"><span>Sim, superou as expectativas!</span></label>
@@ -128,9 +128,30 @@
     </div>
   </div>
 
+  <!-- Etapa 2b: NOVA — Qualidade dos candidatos -->
+  <div id="s2b" class="step">
+    <div class="step-label">Pergunta 3 de 7</div>
+    <div class="step-title">Classifique a qualidade dos candidatos apresentados</div>
+    <div class="step-sub">0 = Muito abaixo do esperado &nbsp;·&nbsp; 5 = Muito acima do esperado</div>
+    <div class="nps-scale">
+      <button class="nps-btn2" onclick="selectNps2(0)">0</button>
+      <button class="nps-btn2" onclick="selectNps2(1)">1</button>
+      <button class="nps-btn2" onclick="selectNps2(2)">2</button>
+      <button class="nps-btn2" onclick="selectNps2(3)">3</button>
+      <button class="nps-btn2" onclick="selectNps2(4)">4</button>
+      <button class="nps-btn2" onclick="selectNps2(5)">5</button>
+    </div>
+    <div class="nps-labels"><span>Muito abaixo do esperado</span><span>Muito acima do esperado</span></div>
+    <p class="error-msg" id="err2b">Selecione uma opção.</p>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack('2b')"><i class="ti ti-arrow-left"></i> Voltar</button>
+      <button class="btn-next" onclick="goNext('2b')">Continuar <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
+
   <!-- Etapa 3: Matriz de avaliação -->
   <div id="s3" class="step">
-    <div class="step-label">Pergunta 3 de 6</div>
+    <div class="step-label">Pergunta 4 de 7</div>
     <div class="step-title">Como você avalia os seguintes aspectos?</div>
     <div class="step-sub">Escala de 1 (ruim) a 5 (excelente)</div>
     <table class="matrix-table">
@@ -154,7 +175,7 @@
 
   <!-- Etapa 4: O que gostou -->
   <div id="s4" class="step">
-    <div class="step-label">Pergunta 4 de 6</div>
+    <div class="step-label">Pergunta 5 de 7</div>
     <div class="step-title">O que você mais gostou em nosso trabalho?</div>
     <div class="step-sub">Opcional — mas adoramos saber o que fez a diferença para você.</div>
     <textarea class="textarea-field" id="gostou" placeholder="Conte-nos o que mais te agradou..."></textarea>
@@ -166,7 +187,7 @@
 
   <!-- Etapa 5: O que melhorar -->
   <div id="s5" class="step">
-    <div class="step-label">Pergunta 5 de 6</div>
+    <div class="step-label">Pergunta 6 de 7</div>
     <div class="step-title">Existe algo que poderíamos fazer melhor?</div>
     <div class="step-sub">Opcional — seu feedback honesto nos ajuda a crescer.</div>
     <textarea class="textarea-field" id="melhorar" placeholder="Seu feedback nos ajuda a crescer..."></textarea>
@@ -178,7 +199,7 @@
 
   <!-- Etapa 6: Autorização -->
   <div id="s6" class="step">
-    <div class="step-label">Pergunta 6 de 6</div>
+    <div class="step-label">Pergunta 7 de 7</div>
     <div class="step-title">Você autorizaria o uso do seu comentário como depoimento?</div>
     <div class="step-sub">Em nossas redes sociais e materiais de divulgação.</div>
     <div class="auth-btns">
@@ -202,18 +223,28 @@
   </div>
 </div>
 
+<style>
+  .nps-btn2{width:54px;height:54px;border-radius:10px;border:1px solid #D8D6F5;background:#fff;cursor:pointer;font-size:17px;font-weight:600;color:#6b6b80;transition:all .15s}
+  .nps-btn2:hover{border-color:#7F77DD;color:#7F77DD;background:#EEEDFE}
+  .nps-btn2.selected{background:#7F77DD;border-color:#7F77DD;color:#fff}
+</style>
+
 <script>
-var state = { nps: null, vaga: null, auth: null };
+var state = { nps: null, vaga: null, qualidade_candidatos: null, auth: null };
 var WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwnNwHIrHETLf_ypUyL5ZftYNSJ40Z_bhQ4_GrPi9M_AJF_42Tj29wkvxRxEe9SYr8/exec';
 
-function setProgress(step) {
-  document.getElementById('progressFill').style.width = Math.round((step / 7) * 100) + '%';
+// Ordem das etapas
+var steps = [0, 1, 2, '2b', 3, 4, 5, 6, 7];
+
+function setProgress(stepId) {
+  var idx = steps.indexOf(stepId);
+  document.getElementById('progressFill').style.width = Math.round((idx / (steps.length - 1)) * 100) + '%';
 }
 
-function showStep(n) {
+function showStep(id) {
   document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
-  document.getElementById('s' + n).classList.add('active');
-  setProgress(n);
+  document.getElementById('s' + id).classList.add('active');
+  setProgress(id);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -233,6 +264,10 @@ function goNext(current) {
     if (!state.vaga) { document.getElementById('err2').style.display = 'block'; return; }
     document.getElementById('err2').style.display = 'none';
   }
+  if (current === '2b') {
+    if (state.qualidade_candidatos === null) { document.getElementById('err2b').style.display = 'block'; return; }
+    document.getElementById('err2b').style.display = 'none';
+  }
   if (current === 3) {
     var ok = true;
     ['m1','m2','m3','m4','m5'].forEach(function(n) {
@@ -242,14 +277,25 @@ function goNext(current) {
     document.getElementById('err3').style.display = 'none';
   }
   if (current === 6) return;
-  showStep(current + 1);
+  var idx = steps.indexOf(current);
+  showStep(steps[idx + 1]);
 }
 
-function goBack(current) { showStep(current - 1); }
+function goBack(current) {
+  var idx = steps.indexOf(current);
+  showStep(steps[idx - 1]);
+}
 
 function selectNps(val) {
   state.nps = val;
   document.querySelectorAll('.nps-btn').forEach(function(b, i) {
+    b.classList.toggle('selected', i === val);
+  });
+}
+
+function selectNps2(val) {
+  state.qualidade_candidatos = val;
+  document.querySelectorAll('.nps-btn2').forEach(function(b, i) {
     b.classList.toggle('selected', i === val);
   });
 }
@@ -282,6 +328,7 @@ function enviar() {
     empresa: document.getElementById('empresa').value.trim(),
     nps: state.nps,
     vaga: state.vaga,
+    qualidade_candidatos: state.qualidade_candidatos,
     qualidade_servico: m.m1,
     atendimento_equipe: m.m2,
     agilidade_respostas: m.m3,
