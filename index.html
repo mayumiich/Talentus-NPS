@@ -3,242 +3,328 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NPS Talentus — Avalie nosso serviço</title>
+<title>NPS Talentüs — Avalie nosso serviço</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#F5F4FC;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem}
-  .card{background:#fff;border-radius:16px;box-shadow:0 2px 24px rgba(83,74,183,.10);max-width:620px;width:100%;padding:2.5rem 2rem 2.5rem}
-  .logo-bar{display:flex;align-items:center;gap:10px;margin-bottom:2rem}
-  .logo-circle{width:42px;height:42px;border-radius:50%;background:#7F77DD;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .logo-circle span{color:#fff;font-size:13px;font-weight:600}
-  .brand-name{font-size:18px;font-weight:600;color:#534AB7}
-  .progress-bar{height:3px;background:#EEEDFE;border-radius:2px;margin-bottom:2rem}
-  .progress-fill{height:100%;background:#7F77DD;border-radius:2px;transition:width .4s ease}
+  body{font-family:'Inter',sans-serif;background:#f7f7f7;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem}
+  .card{background:#fff;border-radius:20px;box-shadow:0 4px 32px rgba(0,0,0,.08);max-width:640px;width:100%;overflow:hidden}
+
+  /* ── Logo ── */
+  .logo-u{font-size:36px;font-weight:800;color:#1a1a1a;line-height:1;letter-spacing:-1px}
+  .logo-u .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#1a1a1a;margin:0 1px;vertical-align:top;margin-top:4px}
+  .logo-name{font-size:15px;font-weight:700;color:#1a1a1a;letter-spacing:.5px}
+
+  /* ── Tela de boas-vindas ── */
+  .welcome-hero{background:#1a1a1a;padding:3.5rem 2.5rem 3rem;text-align:center;position:relative;overflow:hidden}
+  .welcome-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:#fe936d;opacity:.12}
+  .welcome-hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;border-radius:50%;background:#fed759;opacity:.10}
+  .hero-logo{margin-bottom:1.5rem}
+  .hero-u{font-size:72px;font-weight:800;color:#fff;line-height:1;letter-spacing:-2px;position:relative;display:inline-block}
+  .hero-u .dots{display:flex;gap:12px;justify-content:center;margin-bottom:4px}
+  .hero-u .dots span{width:14px;height:14px;border-radius:50%;background:#fe936d;display:inline-block}
+  .hero-u .letter{display:block;font-size:80px;font-weight:800;color:#fff;line-height:.9}
+  .hero-brand{font-size:28px;font-weight:700;color:#fff;letter-spacing:1px;margin-top:.75rem}
+  .hero-brand em{font-style:normal;color:#fe936d}
+  .welcome-body{padding:2.5rem 2.5rem 2rem}
+  .welcome-tag{display:inline-block;background:#fff3ee;color:#fe936d;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .welcome-title{font-size:24px;font-weight:700;color:#1a1a1a;margin-bottom:.75rem;line-height:1.3}
+  .welcome-desc{font-size:15px;color:#555;line-height:1.7;margin-bottom:2rem}
+  .welcome-time{display:flex;align-items:center;gap:8px;font-size:13px;color:#888;margin-bottom:2rem}
+  .welcome-time i{color:#fe936d;font-size:16px}
+  .btn-start{width:100%;padding:16px;background:#fe936d;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s,transform .1s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .btn-start:hover{background:#fd7d53;transform:translateY(-1px)}
+  .btn-start:active{transform:translateY(0)}
+
+  /* ── Formulário ── */
+  .form-header{background:#1a1a1a;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between}
+  .header-logo{display:flex;align-items:center;gap:10px}
+  .header-u{font-size:22px;font-weight:800;color:#fff;line-height:1;letter-spacing:-1px}
+  .header-u-dots{display:flex;gap:5px;margin-bottom:2px}
+  .header-u-dots span{width:5px;height:5px;border-radius:50%;background:#fe936d;display:inline-block}
+  .header-brand{font-size:14px;font-weight:700;color:#fff;letter-spacing:.5px}
+  .header-step{font-size:12px;color:#888;font-weight:500}
+
+  .progress-wrap{height:4px;background:#2a2a2a}
+  .progress-fill{height:100%;background:#fe936d;transition:width .4s ease}
+
+  .form-body{padding:2rem 2.5rem 2.5rem}
   .step{display:none}
   .step.active{display:block}
-  .step-label{font-size:12px;color:#7F77DD;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
-  .step-title{font-size:20px;font-weight:600;color:#1a1a2e;margin-bottom:.5rem;line-height:1.4}
-  .step-sub{font-size:14px;color:#6b6b80;margin-bottom:1.5rem;line-height:1.6}
-  .field{margin-bottom:1.25rem}
-  .field label{display:block;font-size:14px;color:#6b6b80;margin-bottom:.4rem;font-weight:500}
-  .field input{width:100%;padding:11px 14px;border:1px solid #D8D6F5;border-radius:10px;font-size:15px;color:#1a1a2e;outline:none;transition:border .15s,box-shadow .15s;background:#fff}
-  .field input:focus{border-color:#7F77DD;box-shadow:0 0 0 3px #EEEDFE}
+  .step-label{font-size:11px;color:#0070cb;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+  .step-title{font-size:20px;font-weight:700;color:#1a1a1a;margin-bottom:.4rem;line-height:1.4}
+  .step-sub{font-size:14px;color:#777;margin-bottom:1.5rem;line-height:1.6}
+
+  .field{margin-bottom:1.1rem}
+  .field label{display:block;font-size:13px;color:#555;margin-bottom:.4rem;font-weight:500}
+  .field input{width:100%;padding:11px 14px;border:1.5px solid #e8e8e8;border-radius:10px;font-size:15px;color:#1a1a1a;outline:none;transition:border .15s,box-shadow .15s;background:#fff;font-family:'Inter',sans-serif}
+  .field input:focus{border-color:#fe936d;box-shadow:0 0 0 3px rgba(254,147,109,.12)}
+
   .nps-scale{display:flex;gap:6px;flex-wrap:wrap;margin-top:.5rem}
-  .nps-btn{min-width:46px;height:46px;border-radius:10px;border:1px solid #D8D6F5;background:#fff;cursor:pointer;font-size:15px;font-weight:600;color:#6b6b80;transition:all .15s;padding:0 6px}
-  .nps-btn:hover{border-color:#7F77DD;color:#7F77DD;background:#EEEDFE}
-  .nps-btn.selected{background:#7F77DD;border-color:#7F77DD;color:#fff}
+  .nps-btn{min-width:46px;height:46px;border-radius:10px;border:1.5px solid #e8e8e8;background:#fff;cursor:pointer;font-size:15px;font-weight:600;color:#555;transition:all .15s;font-family:'Inter',sans-serif;padding:0 4px}
+  .nps-btn:hover{border-color:#fe936d;color:#fe936d;background:#fff8f5}
+  .nps-btn.selected{background:#fe936d;border-color:#fe936d;color:#fff}
   .nps-labels{display:flex;justify-content:space-between;margin-top:.6rem}
-  .nps-labels span{font-size:12px;color:#6b6b80}
-  .radio-group{display:flex;flex-direction:column;gap:.6rem;margin-top:.5rem}
-  .radio-opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid #E8E6F8;border-radius:10px;cursor:pointer;transition:all .15s}
-  .radio-opt:hover{border-color:#AFA9EC;background:#EEEDFE}
-  .radio-opt.selected{border-color:#7F77DD;background:#EEEDFE}
-  .radio-opt input{accent-color:#7F77DD;width:17px;height:17px;flex-shrink:0}
-  .radio-opt span{font-size:15px;color:#1a1a2e}
+  .nps-labels span{font-size:11px;color:#999}
+
+  .nps-btn2{min-width:52px;height:52px;border-radius:10px;border:1.5px solid #e8e8e8;background:#fff;cursor:pointer;font-size:16px;font-weight:600;color:#555;transition:all .15s;font-family:'Inter',sans-serif;padding:0 6px}
+  .nps-btn2:hover{border-color:#fe936d;color:#fe936d;background:#fff8f5}
+  .nps-btn2.selected{background:#fe936d;border-color:#fe936d;color:#fff}
+
+  .radio-group{display:flex;flex-direction:column;gap:.55rem;margin-top:.5rem}
+  .radio-opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1.5px solid #ebebeb;border-radius:10px;cursor:pointer;transition:all .15s}
+  .radio-opt:hover{border-color:#fe936d;background:#fff8f5}
+  .radio-opt.selected{border-color:#fe936d;background:#fff3ee}
+  .radio-opt input{accent-color:#fe936d;width:17px;height:17px;flex-shrink:0}
+  .radio-opt span{font-size:15px;color:#1a1a1a}
+
   .matrix-table{width:100%;margin-top:.5rem;border-collapse:collapse}
-  .matrix-table th{font-size:12px;color:#6b6b80;font-weight:500;padding:6px 4px;text-align:center;width:46px}
+  .matrix-table th{font-size:12px;color:#999;font-weight:500;padding:6px 4px;text-align:center;width:42px}
   .matrix-table th:first-child{text-align:left;width:auto}
-  .matrix-table td{padding:10px 4px;text-align:center;border-bottom:1px solid #F0EFF8}
-  .matrix-table td:first-child{text-align:left;font-size:14px;color:#1a1a2e;padding-left:0}
+  .matrix-table td{padding:10px 4px;text-align:center;border-bottom:1px solid #f3f3f3}
+  .matrix-table td:first-child{text-align:left;font-size:14px;color:#1a1a1a;padding-left:0}
   .matrix-table tr:last-child td{border-bottom:none}
-  .matrix-radio{width:18px;height:18px;accent-color:#7F77DD;cursor:pointer}
-  .textarea-field{width:100%;padding:11px 14px;border:1px solid #D8D6F5;border-radius:10px;font-size:15px;color:#1a1a2e;outline:none;min-height:110px;resize:vertical;font-family:inherit;transition:border .15s,box-shadow .15s}
-  .textarea-field:focus{border-color:#7F77DD;box-shadow:0 0 0 3px #EEEDFE}
+  .matrix-radio{width:18px;height:18px;accent-color:#fe936d;cursor:pointer}
+
+  .textarea-field{width:100%;padding:11px 14px;border:1.5px solid #e8e8e8;border-radius:10px;font-size:15px;color:#1a1a1a;outline:none;min-height:110px;resize:vertical;font-family:'Inter',sans-serif;transition:border .15s}
+  .textarea-field:focus{border-color:#fe936d;box-shadow:0 0 0 3px rgba(254,147,109,.12)}
+
   .auth-btns{display:flex;gap:10px;margin-top:.5rem}
-  .auth-btn{flex:1;padding:13px;border:1px solid #D8D6F5;border-radius:10px;background:#fff;cursor:pointer;font-size:15px;color:#6b6b80;transition:all .15s;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px}
-  .auth-btn:hover{border-color:#AFA9EC;background:#EEEDFE}
-  .auth-btn.selected{background:#7F77DD;border-color:#7F77DD;color:#fff}
+  .auth-btn{flex:1;padding:14px;border:1.5px solid #e8e8e8;border-radius:10px;background:#fff;cursor:pointer;font-size:15px;font-weight:600;color:#555;transition:all .15s;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px}
+  .auth-btn:hover{border-color:#fe936d;background:#fff8f5;color:#fe936d}
+  .auth-btn.selected{background:#fe936d;border-color:#fe936d;color:#fff}
+
   .nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:2rem}
-  .btn-back{background:none;border:none;cursor:pointer;font-size:14px;color:#6b6b80;display:flex;align-items:center;gap:4px;padding:8px 0}
-  .btn-back:hover{color:#1a1a2e}
-  .btn-next{background:#7F77DD;color:#fff;border:none;padding:13px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s;display:flex;align-items:center;gap:6px}
-  .btn-next:hover{background:#534AB7}
-  .btn-next:disabled{background:#C5C3E8;cursor:not-allowed}
-  .error-msg{font-size:13px;color:#A32D2D;margin-top:.5rem;display:none}
-  .thank-card{text-align:center;padding:2rem 1rem}
-  .thank-icon{width:64px;height:64px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem}
-  .nps-btn2{min-width:46px;height:46px;border-radius:10px;border:1px solid #D8D6F5;background:#fff;cursor:pointer;font-size:15px;font-weight:600;color:#6b6b80;transition:all .15s;padding:0 6px}
-  .nps-btn2:hover{border-color:#7F77DD;color:#7F77DD;background:#EEEDFE}
-  .nps-btn2.selected{background:#7F77DD;border-color:#7F77DD;color:#fff}
+  .btn-back{background:none;border:none;cursor:pointer;font-size:14px;color:#999;display:flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;padding:8px 0}
+  .btn-back:hover{color:#1a1a1a}
+  .btn-next{background:#fe936d;color:#fff;border:none;padding:13px 32px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s;display:flex;align-items:center;gap:6px}
+  .btn-next:hover{background:#fd7d53}
+  .btn-next:disabled{background:#ddd;cursor:not-allowed}
+
+  .error-msg{font-size:13px;color:#c0392b;margin-top:.5rem;display:none}
+
+  /* ── Tela de obrigada ── */
+  .thank-hero{background:#1a1a1a;padding:3rem 2rem;text-align:center;position:relative;overflow:hidden}
+  .thank-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:#fed759;opacity:.12}
+  .thank-hero::after{content:'';position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;border-radius:50%;background:#fe936d;opacity:.12}
+  .thank-u{font-size:64px;font-weight:800;color:#fff;line-height:1;display:inline-block}
+  .thank-u-dots{display:flex;gap:10px;justify-content:center;margin-bottom:6px}
+  .thank-u-dots span{width:12px;height:12px;border-radius:50%;background:#fed759;display:inline-block}
+  .thank-u-letter{display:block;font-size:72px;font-weight:800;color:#fff;line-height:.9}
+  .thank-body{padding:2.5rem 2.5rem 3rem;text-align:center}
+  .thank-badge{display:inline-flex;align-items:center;gap:6px;background:#fff3ee;color:#fe936d;font-size:13px;font-weight:600;padding:6px 16px;border-radius:20px;margin-bottom:1.25rem}
+  .thank-title{font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:.75rem}
+  .thank-desc{font-size:15px;color:#666;line-height:1.7}
+  .thank-bar{height:4px;background:#fed759;border-radius:0 0 20px 20px;margin-top:2rem}
+
   @media(max-width:500px){
-    body{padding:0;align-items:flex-start}
-    .card{border-radius:0;box-shadow:none;min-height:100vh;padding:1.5rem 1.25rem}
-    .nps-btn,.nps-btn2{min-width:38px;height:40px;font-size:13px}
+    body{padding:0}
+    .card{border-radius:0;min-height:100vh}
+    .welcome-body,.form-body{padding:1.75rem 1.25rem}
+    .welcome-hero{padding:2.5rem 1.5rem 2rem}
+    .form-header{padding:1rem 1.25rem}
+    .nps-btn{min-width:36px;height:40px;font-size:13px}
+    .nps-btn2{min-width:44px;height:44px;font-size:15px}
     .auth-btns{flex-direction:column}
+    .hero-u .letter{font-size:60px}
+    .hero-brand{font-size:22px}
   }
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="logo-bar">
-    <div class="logo-circle"><span>TL</span></div>
-    <span class="brand-name">Talentus</span>
-  </div>
 
-  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:12%"></div></div>
-
-  <!-- Etapa 0: Dados de contato -->
-  <div id="s0" class="step active">
-    <div class="step-label">Identificação</div>
-    <div class="step-title">Vamos começar com seus dados de contato</div>
-    <div class="step-sub">Suas informações ficam seguras e são usadas apenas para personalizar o retorno.</div>
-    <div class="field"><label>Nome completo</label><input id="nome" type="text" placeholder="Seu nome"></div>
-    <div class="field"><label>WhatsApp</label><input id="whatsapp" type="text" placeholder="(11) 99999-9999"></div>
-    <div class="field"><label>Empresa</label><input id="empresa" type="text" placeholder="Nome da empresa"></div>
-    <p class="error-msg" id="err0">Por favor, preencha todos os campos.</p>
-    <div class="nav-row">
-      <span></span>
-      <button class="btn-next" onclick="goNext(0)">Continuar <i class="ti ti-arrow-right"></i></button>
+  <!-- ══ TELA 0: Boas-vindas ══ -->
+  <div id="welcome">
+    <div class="welcome-hero">
+      <div class="hero-logo">
+        <div class="hero-u">
+          <div class="dots"><span></span><span></span></div>
+          <span class="letter">ü</span>
+        </div>
+        <div class="hero-brand">Talent<em>ü</em>s</div>
+      </div>
     </div>
-  </div>
-
-  <!-- Etapa 1: NPS 0–10 -->
-  <div id="s1" class="step">
-    <div class="step-label">Pergunta 1 de 7</div>
-    <div class="step-title">Em uma escala de 0 a 10, o quanto você recomendaria a Talentus para um amigo ou colega?</div>
-    <div class="step-sub">0 = Não recomendaria de forma alguma &nbsp;·&nbsp; 10 = Recomendaria com certeza</div>
-    <div class="nps-scale" id="npsScale">
-      <button class="nps-btn" onclick="selectNps(0)">0</button>
-      <button class="nps-btn" onclick="selectNps(1)">1</button>
-      <button class="nps-btn" onclick="selectNps(2)">2</button>
-      <button class="nps-btn" onclick="selectNps(3)">3</button>
-      <button class="nps-btn" onclick="selectNps(4)">4</button>
-      <button class="nps-btn" onclick="selectNps(5)">5</button>
-      <button class="nps-btn" onclick="selectNps(6)">6</button>
-      <button class="nps-btn" onclick="selectNps(7)">7</button>
-      <button class="nps-btn" onclick="selectNps(8)">8</button>
-      <button class="nps-btn" onclick="selectNps(9)">9</button>
-      <button class="nps-btn" onclick="selectNps(10)">10</button>
-    </div>
-    <div class="nps-labels"><span>Não recomendaria</span><span>Recomendaria com certeza</span></div>
-    <p class="error-msg" id="err1">Selecione uma opção.</p>
-    <div class="nav-row">
-      <button class="btn-back" onclick="goBack(1)"><i class="ti ti-arrow-left"></i> Voltar</button>
-      <button class="btn-next" onclick="goNext(1)">Continuar <i class="ti ti-arrow-right"></i></button>
+    <div class="welcome-body">
+      <span class="welcome-tag">✦ Avaliação de processo</span>
+      <div class="welcome-title">Sua opinião faz a diferença!</div>
+      <div class="welcome-desc">Você passou por um processo de recrutamento conosco e gostaríamos de saber como foi sua experiência. Seu feedback nos ajuda a crescer e a entregar cada vez mais valor.</div>
+      <div class="welcome-time"><i class="ti ti-clock"></i> Leva menos de 3 minutos</div>
+      <button class="btn-start" onclick="startForm()">Iniciar avaliação <i class="ti ti-arrow-right"></i></button>
     </div>
   </div>
 
-  <!-- Etapa 2: Vaga -->
-  <div id="s2" class="step">
-    <div class="step-label">Pergunta 2 de 7</div>
-    <div class="step-title">A vaga foi preenchida conforme sua expectativa?</div>
-    <div class="radio-group">
-      <label class="radio-opt" onclick="selectRadio(this)"><input type="radio" name="vaga" value="Sim, superou as expectativas!"><span>Sim, superou as expectativas!</span></label>
-      <label class="radio-opt" onclick="selectRadio(this)"><input type="radio" name="vaga" value="Sim, atendeu as expectativas"><span>Sim, atendeu as expectativas</span></label>
-      <label class="radio-opt" onclick="selectRadio(this)"><input type="radio" name="vaga" value="Parcialmente"><span>Parcialmente</span></label>
-      <label class="radio-opt" onclick="selectRadio(this)"><input type="radio" name="vaga" value="Não"><span>Não</span></label>
+  <!-- ══ FORMULÁRIO ══ -->
+  <div id="formWrap" style="display:none">
+    <div class="form-header">
+      <div class="header-logo">
+        <div>
+          <div class="header-u-dots"><span></span><span></span></div>
+          <div class="header-u">ü</div>
+        </div>
+        <div class="header-brand">Talentüs</div>
+      </div>
+      <div class="header-step" id="headerStep">Pergunta 1 de 7</div>
     </div>
-    <p class="error-msg" id="err2">Selecione uma opção.</p>
-    <div class="nav-row">
-      <button class="btn-back" onclick="goBack(2)"><i class="ti ti-arrow-left"></i> Voltar</button>
-      <button class="btn-next" onclick="goNext(2)">Continuar <i class="ti ti-arrow-right"></i></button>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+    <div class="form-body">
+
+      <!-- Etapa 0: Dados -->
+      <div id="s0" class="step active">
+        <div class="step-label">Identificação</div>
+        <div class="step-title">Vamos começar com seus dados de contato</div>
+        <div class="step-sub">Suas informações ficam seguras e são usadas apenas para personalizar o retorno.</div>
+        <div class="field"><label>Nome completo</label><input id="nome" type="text" placeholder="Seu nome"></div>
+        <div class="field"><label>WhatsApp</label><input id="whatsapp" type="text" placeholder="(11) 99999-9999"></div>
+        <div class="field"><label>Empresa</label><input id="empresa" type="text" placeholder="Nome da empresa"></div>
+        <p class="error-msg" id="err0">Por favor, preencha todos os campos.</p>
+        <div class="nav-row"><span></span><button class="btn-next" onclick="goNext(0)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+      </div>
+
+      <!-- Etapa 1: NPS 0-10 -->
+      <div id="s1" class="step">
+        <div class="step-label">Pergunta 1 de 7</div>
+        <div class="step-title">Em uma escala de 0 a 10, o quanto você recomendaria a Talentüs para um amigo ou colega?</div>
+        <div class="step-sub">0 = Não recomendaria de forma alguma &nbsp;·&nbsp; 10 = Recomendaria com certeza</div>
+        <div class="nps-scale" id="npsScale">
+          <button class="nps-btn" onclick="selectNps(0)">0</button>
+          <button class="nps-btn" onclick="selectNps(1)">1</button>
+          <button class="nps-btn" onclick="selectNps(2)">2</button>
+          <button class="nps-btn" onclick="selectNps(3)">3</button>
+          <button class="nps-btn" onclick="selectNps(4)">4</button>
+          <button class="nps-btn" onclick="selectNps(5)">5</button>
+          <button class="nps-btn" onclick="selectNps(6)">6</button>
+          <button class="nps-btn" onclick="selectNps(7)">7</button>
+          <button class="nps-btn" onclick="selectNps(8)">8</button>
+          <button class="nps-btn" onclick="selectNps(9)">9</button>
+          <button class="nps-btn" onclick="selectNps(10)">10</button>
+        </div>
+        <div class="nps-labels"><span>Não recomendaria</span><span>Recomendaria com certeza</span></div>
+        <p class="error-msg" id="err1">Selecione uma opção.</p>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(1)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext(1)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+      </div>
+
+      <!-- Etapa 2: Vaga -->
+      <div id="s2" class="step">
+        <div class="step-label">Pergunta 2 de 7</div>
+        <div class="step-title">A vaga foi preenchida conforme sua expectativa?</div>
+        <div class="radio-group">
+          <label class="radio-opt" onclick="selectRadio(this)"><input type="radio" name="vaga" value="Sim, superou as expectativas!"><span>Sim, superou as expectativas!</span></label>
+          <label class="radio-opt" onclick="selectRadio(this)"><input type="radio" name="vaga" value="Sim, atendeu as expectativas"><span>Sim, atendeu as expectativas</span></label>
+          <label class="radio-opt" onclick="selectRadio(this)"><input type="radio" name="vaga" value="Parcialmente"><span>Parcialmente</span></label>
+          <label class="radio-opt" onclick="selectRadio(this)"><input type="radio" name="vaga" value="Não"><span>Não</span></label>
+        </div>
+        <p class="error-msg" id="err2">Selecione uma opção.</p>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(2)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext(2)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+      </div>
+
+      <!-- Etapa 2b: Qualidade candidatos -->
+      <div id="s2b" class="step">
+        <div class="step-label">Pergunta 3 de 7</div>
+        <div class="step-title">Classifique a qualidade dos candidatos apresentados</div>
+        <div class="step-sub">0 = Muito abaixo do esperado &nbsp;·&nbsp; 5 = Muito acima do esperado</div>
+        <div class="nps-scale">
+          <button class="nps-btn2" onclick="selectNps2(0)">0</button>
+          <button class="nps-btn2" onclick="selectNps2(1)">1</button>
+          <button class="nps-btn2" onclick="selectNps2(2)">2</button>
+          <button class="nps-btn2" onclick="selectNps2(3)">3</button>
+          <button class="nps-btn2" onclick="selectNps2(4)">4</button>
+          <button class="nps-btn2" onclick="selectNps2(5)">5</button>
+        </div>
+        <div class="nps-labels"><span>Muito abaixo do esperado</span><span>Muito acima do esperado</span></div>
+        <p class="error-msg" id="err2b">Selecione uma opção.</p>
+        <div class="nav-row"><button class="btn-back" onclick="goBack('2b')"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext('2b')">Continuar <i class="ti ti-arrow-right"></i></button></div>
+      </div>
+
+      <!-- Etapa 3: Matriz -->
+      <div id="s3" class="step">
+        <div class="step-label">Pergunta 4 de 7</div>
+        <div class="step-title">Como você avalia os seguintes aspectos?</div>
+        <div class="step-sub">Escala de 1 (ruim) a 5 (excelente)</div>
+        <table class="matrix-table">
+          <thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+          <tbody>
+            <tr><td>Qualidade do serviço</td><td><input class="matrix-radio" type="radio" name="m1" value="1"></td><td><input class="matrix-radio" type="radio" name="m1" value="2"></td><td><input class="matrix-radio" type="radio" name="m1" value="3"></td><td><input class="matrix-radio" type="radio" name="m1" value="4"></td><td><input class="matrix-radio" type="radio" name="m1" value="5"></td></tr>
+            <tr><td>Atendimento da equipe</td><td><input class="matrix-radio" type="radio" name="m2" value="1"></td><td><input class="matrix-radio" type="radio" name="m2" value="2"></td><td><input class="matrix-radio" type="radio" name="m2" value="3"></td><td><input class="matrix-radio" type="radio" name="m2" value="4"></td><td><input class="matrix-radio" type="radio" name="m2" value="5"></td></tr>
+            <tr><td>Agilidade nas respostas</td><td><input class="matrix-radio" type="radio" name="m3" value="1"></td><td><input class="matrix-radio" type="radio" name="m3" value="2"></td><td><input class="matrix-radio" type="radio" name="m3" value="3"></td><td><input class="matrix-radio" type="radio" name="m3" value="4"></td><td><input class="matrix-radio" type="radio" name="m3" value="5"></td></tr>
+            <tr><td>Clareza na comunicação</td><td><input class="matrix-radio" type="radio" name="m4" value="1"></td><td><input class="matrix-radio" type="radio" name="m4" value="2"></td><td><input class="matrix-radio" type="radio" name="m4" value="3"></td><td><input class="matrix-radio" type="radio" name="m4" value="4"></td><td><input class="matrix-radio" type="radio" name="m4" value="5"></td></tr>
+            <tr><td>Resultado entregue</td><td><input class="matrix-radio" type="radio" name="m5" value="1"></td><td><input class="matrix-radio" type="radio" name="m5" value="2"></td><td><input class="matrix-radio" type="radio" name="m5" value="3"></td><td><input class="matrix-radio" type="radio" name="m5" value="4"></td><td><input class="matrix-radio" type="radio" name="m5" value="5"></td></tr>
+          </tbody>
+        </table>
+        <p class="error-msg" id="err3">Avalie todos os aspectos para continuar.</p>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(3)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext(3)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+      </div>
+
+      <!-- Etapa 4: O que gostou -->
+      <div id="s4" class="step">
+        <div class="step-label">Pergunta 5 de 7</div>
+        <div class="step-title">O que você mais gostou em nosso trabalho?</div>
+        <div class="step-sub">Opcional — mas adoramos saber o que fez a diferença para você.</div>
+        <textarea class="textarea-field" id="gostou" placeholder="Conte-nos o que mais te agradou..."></textarea>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(4)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext(4)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+      </div>
+
+      <!-- Etapa 5: Melhorar -->
+      <div id="s5" class="step">
+        <div class="step-label">Pergunta 6 de 7</div>
+        <div class="step-title">Existe algo que poderíamos fazer melhor?</div>
+        <div class="step-sub">Opcional — seu feedback honesto nos ajuda a crescer.</div>
+        <textarea class="textarea-field" id="melhorar" placeholder="Seu feedback nos ajuda a crescer..."></textarea>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(5)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext(5)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+      </div>
+
+      <!-- Etapa 6: Autorização -->
+      <div id="s6" class="step">
+        <div class="step-label">Pergunta 7 de 7</div>
+        <div class="step-title">Você autorizaria o uso do seu comentário como depoimento?</div>
+        <div class="step-sub">Em nossas redes sociais e materiais de divulgação.</div>
+        <div class="auth-btns">
+          <button class="auth-btn" id="authSim" onclick="selectAuth('Sim')"><i class="ti ti-check"></i> Sim, autorizo</button>
+          <button class="auth-btn" id="authNao" onclick="selectAuth('Não')"><i class="ti ti-x"></i> Não autorizo</button>
+        </div>
+        <p class="error-msg" id="err6">Selecione uma opção.</p>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(6)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" id="btnEnviar" onclick="enviar()"><i class="ti ti-send"></i> Enviar avaliação</button></div>
+      </div>
+
+    </div><!-- /form-body -->
+  </div><!-- /formWrap -->
+
+  <!-- ══ TELA OBRIGADA ══ -->
+  <div id="thankWrap" style="display:none">
+    <div class="thank-hero">
+      <div class="thank-u-dots"><span></span><span></span></div>
+      <span class="thank-u-letter">ü</span>
     </div>
+    <div class="thank-body">
+      <div class="thank-badge"><i class="ti ti-heart"></i> Muito obrigada!</div>
+      <div class="thank-title">Obrigada por sua contribuição!</div>
+      <div class="thank-desc">Seu feedback é muito valioso para nós. Com ele continuamos crescendo e entregando o melhor resultado em cada processo de recrutamento.</div>
+    </div>
+    <div class="thank-bar"></div>
   </div>
 
-  <!-- Etapa 2b: Qualidade dos candidatos -->
-  <div id="s2b" class="step">
-    <div class="step-label">Pergunta 3 de 7</div>
-    <div class="step-title">Classifique a qualidade dos candidatos apresentados</div>
-    <div class="step-sub">0 = Muito abaixo do esperado &nbsp;·&nbsp; 5 = Muito acima do esperado</div>
-    <div class="nps-scale">
-      <button class="nps-btn2" onclick="selectNps2(0)">0</button>
-      <button class="nps-btn2" onclick="selectNps2(1)">1</button>
-      <button class="nps-btn2" onclick="selectNps2(2)">2</button>
-      <button class="nps-btn2" onclick="selectNps2(3)">3</button>
-      <button class="nps-btn2" onclick="selectNps2(4)">4</button>
-      <button class="nps-btn2" onclick="selectNps2(5)">5</button>
-    </div>
-    <div class="nps-labels"><span>Muito abaixo do esperado</span><span>Muito acima do esperado</span></div>
-    <p class="error-msg" id="err2b">Selecione uma opção.</p>
-    <div class="nav-row">
-      <button class="btn-back" onclick="goBack('2b')"><i class="ti ti-arrow-left"></i> Voltar</button>
-      <button class="btn-next" onclick="goNext('2b')">Continuar <i class="ti ti-arrow-right"></i></button>
-    </div>
-  </div>
-
-  <!-- Etapa 3: Matriz -->
-  <div id="s3" class="step">
-    <div class="step-label">Pergunta 4 de 7</div>
-    <div class="step-title">Como você avalia os seguintes aspectos?</div>
-    <div class="step-sub">Escala de 1 (ruim) a 5 (excelente)</div>
-    <table class="matrix-table">
-      <thead>
-        <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Qualidade do serviço</td><td><input class="matrix-radio" type="radio" name="m1" value="1"></td><td><input class="matrix-radio" type="radio" name="m1" value="2"></td><td><input class="matrix-radio" type="radio" name="m1" value="3"></td><td><input class="matrix-radio" type="radio" name="m1" value="4"></td><td><input class="matrix-radio" type="radio" name="m1" value="5"></td></tr>
-        <tr><td>Atendimento da equipe</td><td><input class="matrix-radio" type="radio" name="m2" value="1"></td><td><input class="matrix-radio" type="radio" name="m2" value="2"></td><td><input class="matrix-radio" type="radio" name="m2" value="3"></td><td><input class="matrix-radio" type="radio" name="m2" value="4"></td><td><input class="matrix-radio" type="radio" name="m2" value="5"></td></tr>
-        <tr><td>Agilidade nas respostas</td><td><input class="matrix-radio" type="radio" name="m3" value="1"></td><td><input class="matrix-radio" type="radio" name="m3" value="2"></td><td><input class="matrix-radio" type="radio" name="m3" value="3"></td><td><input class="matrix-radio" type="radio" name="m3" value="4"></td><td><input class="matrix-radio" type="radio" name="m3" value="5"></td></tr>
-        <tr><td>Clareza na comunicação</td><td><input class="matrix-radio" type="radio" name="m4" value="1"></td><td><input class="matrix-radio" type="radio" name="m4" value="2"></td><td><input class="matrix-radio" type="radio" name="m4" value="3"></td><td><input class="matrix-radio" type="radio" name="m4" value="4"></td><td><input class="matrix-radio" type="radio" name="m4" value="5"></td></tr>
-        <tr><td>Resultado entregue</td><td><input class="matrix-radio" type="radio" name="m5" value="1"></td><td><input class="matrix-radio" type="radio" name="m5" value="2"></td><td><input class="matrix-radio" type="radio" name="m5" value="3"></td><td><input class="matrix-radio" type="radio" name="m5" value="4"></td><td><input class="matrix-radio" type="radio" name="m5" value="5"></td></tr>
-      </tbody>
-    </table>
-    <p class="error-msg" id="err3">Avalie todos os aspectos para continuar.</p>
-    <div class="nav-row">
-      <button class="btn-back" onclick="goBack(3)"><i class="ti ti-arrow-left"></i> Voltar</button>
-      <button class="btn-next" onclick="goNext(3)">Continuar <i class="ti ti-arrow-right"></i></button>
-    </div>
-  </div>
-
-  <!-- Etapa 4: O que gostou -->
-  <div id="s4" class="step">
-    <div class="step-label">Pergunta 5 de 7</div>
-    <div class="step-title">O que você mais gostou em nosso trabalho?</div>
-    <div class="step-sub">Opcional — mas adoramos saber o que fez a diferença para você.</div>
-    <textarea class="textarea-field" id="gostou" placeholder="Conte-nos o que mais te agradou..."></textarea>
-    <div class="nav-row">
-      <button class="btn-back" onclick="goBack(4)"><i class="ti ti-arrow-left"></i> Voltar</button>
-      <button class="btn-next" onclick="goNext(4)">Continuar <i class="ti ti-arrow-right"></i></button>
-    </div>
-  </div>
-
-  <!-- Etapa 5: O que melhorar -->
-  <div id="s5" class="step">
-    <div class="step-label">Pergunta 6 de 7</div>
-    <div class="step-title">Existe algo que poderíamos fazer melhor?</div>
-    <div class="step-sub">Opcional — seu feedback honesto nos ajuda a crescer.</div>
-    <textarea class="textarea-field" id="melhorar" placeholder="Seu feedback nos ajuda a crescer..."></textarea>
-    <div class="nav-row">
-      <button class="btn-back" onclick="goBack(5)"><i class="ti ti-arrow-left"></i> Voltar</button>
-      <button class="btn-next" onclick="goNext(5)">Continuar <i class="ti ti-arrow-right"></i></button>
-    </div>
-  </div>
-
-  <!-- Etapa 6: Autorização -->
-  <div id="s6" class="step">
-    <div class="step-label">Pergunta 7 de 7</div>
-    <div class="step-title">Você autorizaria o uso do seu comentário como depoimento?</div>
-    <div class="step-sub">Em nossas redes sociais e materiais de divulgação.</div>
-    <div class="auth-btns">
-      <button class="auth-btn" id="authSim" onclick="selectAuth('Sim')"><i class="ti ti-check"></i> Sim, autorizo</button>
-      <button class="auth-btn" id="authNao" onclick="selectAuth('Não')"><i class="ti ti-x"></i> Não autorizo</button>
-    </div>
-    <p class="error-msg" id="err6">Selecione uma opção.</p>
-    <div class="nav-row">
-      <button class="btn-back" onclick="goBack(6)"><i class="ti ti-arrow-left"></i> Voltar</button>
-      <button class="btn-next" id="btnEnviar" onclick="enviar()"><i class="ti ti-send"></i> Enviar avaliação</button>
-    </div>
-  </div>
-
-  <!-- Etapa 7: Obrigada -->
-  <div id="s7" class="step">
-    <div class="thank-card">
-      <div class="thank-icon"><i class="ti ti-heart-handshake" style="font-size:30px;color:#7F77DD"></i></div>
-      <div class="step-title" style="margin-bottom:.75rem">Obrigada por sua contribuição!</div>
-      <p style="font-size:15px;color:#6b6b80;line-height:1.7">Seu feedback é muito valioso para nós. Com ele continuamos crescendo e entregando o melhor resultado para você.</p>
-    </div>
-  </div>
-</div>
+</div><!-- /card -->
 
 <script>
 var state = { nps: null, vaga: null, qualidade_candidatos: null, auth: null };
 var WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwnNwHIrHETLf_ypUyL5ZftYNSJ40Z_bhQ4_GrPi9M_AJF_42Tj29wkvxRxEe9SYr8/exec';
-var steps = [0, 1, 2, '2b', 3, 4, 5, 6, 7];
+var steps = [0, 1, 2, '2b', 3, 4, 5, 6];
+var stepLabels = ['', 'Pergunta 1 de 7','Pergunta 2 de 7','Pergunta 3 de 7','Pergunta 4 de 7','Pergunta 5 de 7','Pergunta 6 de 7','Pergunta 7 de 7'];
+
+function startForm() {
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('formWrap').style.display = 'block';
+  showStep(0);
+}
 
 function setProgress(stepId) {
   var idx = steps.indexOf(stepId);
-  document.getElementById('progressFill').style.width = Math.round((idx / (steps.length - 1)) * 100) + '%';
+  var pct = Math.round((idx / (steps.length)) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  var labels = { 0:'', 1:'Pergunta 1 de 7', 2:'Pergunta 2 de 7', '2b':'Pergunta 3 de 7', 3:'Pergunta 4 de 7', 4:'Pergunta 5 de 7', 5:'Pergunta 6 de 7', 6:'Pergunta 7 de 7' };
+  document.getElementById('headerStep').textContent = labels[stepId] || '';
 }
 
 function showStep(id) {
@@ -283,21 +369,22 @@ function goNext(current) {
 
 function goBack(current) {
   var idx = steps.indexOf(current);
+  if (idx === 0) {
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('welcome').style.display = 'block';
+    return;
+  }
   showStep(steps[idx - 1]);
 }
 
 function selectNps(val) {
   state.nps = val;
-  document.querySelectorAll('.nps-btn').forEach(function(b, i) {
-    b.classList.toggle('selected', i === val);
-  });
+  document.querySelectorAll('.nps-btn').forEach(function(b, i) { b.classList.toggle('selected', i === val); });
 }
 
 function selectNps2(val) {
   state.qualidade_candidatos = val;
-  document.querySelectorAll('.nps-btn2').forEach(function(b, i) {
-    b.classList.toggle('selected', i === val);
-  });
+  document.querySelectorAll('.nps-btn2').forEach(function(b, i) { b.classList.toggle('selected', i === val); });
 }
 
 function selectRadio(el) {
@@ -347,7 +434,11 @@ function enviar() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
-  .then(function() { showStep(7); })
+  .then(function() {
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('thankWrap').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  })
   .catch(function() {
     alert('Erro ao enviar. Verifique sua conexão e tente novamente.');
     btn.disabled = false;
