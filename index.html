@@ -427,21 +427,17 @@ function enviar() {
   var btn = document.getElementById('btnEnviar');
   btn.disabled = true;
   btn.innerHTML = '⏳ Enviando...';
+    document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('thankWrap').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
   fetch(WEBHOOK_URL, {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
-  })
-  .then(function() {
-    document.getElementById('formWrap').style.display = 'none';
-    document.getElementById('thankWrap').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  })
-  .catch(function() {
-    alert('Erro ao enviar. Verifique sua conexão e tente novamente.');
-    btn.disabled = false;
-    btn.innerHTML = '✉ Enviar avaliação';
+  }).catch(function() {
+    console.warn('Erro ao enviar para o webhook.');
   });
 }
 </script>
