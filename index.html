@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NPS Talentüs — Avalie nosso serviço</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
@@ -150,8 +150,8 @@
       <span class="welcome-tag">✦ Avaliação de processo</span>
       <div class="welcome-title">Sua opinião faz a diferença!</div>
       <div class="welcome-desc">Você passou por um processo de recrutamento conosco e gostaríamos de saber como foi sua experiência. Seu feedback nos ajuda a crescer e a entregar cada vez mais valor.</div>
-      <div class="welcome-time"><i class="ti ti-clock"></i> Leva menos de 3 minutos</div>
-      <button class="btn-start" onclick="startForm()">Iniciar avaliação <i class="ti ti-arrow-right"></i></button>
+      <div class="welcome-time">⏱ Leva menos de 3 minutos</div>
+      <button class="btn-start" onclick="startForm()">Iniciar avaliação →</button>
     </div>
   </div>
 
@@ -160,7 +160,7 @@
     <div class="form-header">
       <div class="header-logo">
         <div>
-          <div class="header-u-dots"><span></span><span></span></div>
+          
           <div class="header-u">ü</div>
         </div>
         <div class="header-brand">Talentüs</div>
@@ -180,7 +180,7 @@
         <div class="field"><label>WhatsApp</label><input id="whatsapp" type="text" placeholder="(11) 99999-9999"></div>
         <div class="field"><label>Empresa</label><input id="empresa" type="text" placeholder="Nome da empresa"></div>
         <p class="error-msg" id="err0">Por favor, preencha todos os campos.</p>
-        <div class="nav-row"><span></span><button class="btn-next" onclick="goNext(0)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+        <div class="nav-row"><span></span><button class="btn-next" onclick="goNext(0)">Continuar →</button></div>
       </div>
 
       <!-- Etapa 1: NPS 0-10 -->
@@ -203,7 +203,7 @@
         </div>
         <div class="nps-labels"><span>Não recomendaria</span><span>Recomendaria com certeza</span></div>
         <p class="error-msg" id="err1">Selecione uma opção.</p>
-        <div class="nav-row"><button class="btn-back" onclick="goBack(1)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext(1)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(1)">← Voltar</button><button class="btn-next" onclick="goNext(1)">Continuar →</button></div>
       </div>
 
       <!-- Etapa 2: Vaga -->
@@ -217,7 +217,7 @@
           <label class="radio-opt" onclick="selectRadio(this)"><input type="radio" name="vaga" value="Não"><span>Não</span></label>
         </div>
         <p class="error-msg" id="err2">Selecione uma opção.</p>
-        <div class="nav-row"><button class="btn-back" onclick="goBack(2)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext(2)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(2)">← Voltar</button><button class="btn-next" onclick="goNext(2)">Continuar →</button></div>
       </div>
 
       <!-- Etapa 2b: Qualidade candidatos -->
@@ -235,7 +235,7 @@
         </div>
         <div class="nps-labels"><span>Muito abaixo do esperado</span><span>Muito acima do esperado</span></div>
         <p class="error-msg" id="err2b">Selecione uma opção.</p>
-        <div class="nav-row"><button class="btn-back" onclick="goBack('2b')"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext('2b')">Continuar <i class="ti ti-arrow-right"></i></button></div>
+        <div class="nav-row"><button class="btn-back" onclick="goBack('2b')">← Voltar</button><button class="btn-next" onclick="goNext('2b')">Continuar →</button></div>
       </div>
 
       <!-- Etapa 3: Matriz -->
@@ -254,7 +254,7 @@
           </tbody>
         </table>
         <p class="error-msg" id="err3">Avalie todos os aspectos para continuar.</p>
-        <div class="nav-row"><button class="btn-back" onclick="goBack(3)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext(3)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(3)">← Voltar</button><button class="btn-next" onclick="goNext(3)">Continuar →</button></div>
       </div>
 
       <!-- Etapa 4: O que gostou -->
@@ -263,7 +263,7 @@
         <div class="step-title">O que você mais gostou em nosso trabalho?</div>
         <div class="step-sub">Opcional — mas adoramos saber o que fez a diferença para você.</div>
         <textarea class="textarea-field" id="gostou" placeholder="Conte-nos o que mais te agradou..."></textarea>
-        <div class="nav-row"><button class="btn-back" onclick="goBack(4)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext(4)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(4)">← Voltar</button><button class="btn-next" onclick="goNext(4)">Continuar →</button></div>
       </div>
 
       <!-- Etapa 5: Melhorar -->
@@ -272,7 +272,7 @@
         <div class="step-title">Existe algo que poderíamos fazer melhor?</div>
         <div class="step-sub">Opcional — seu feedback honesto nos ajuda a crescer.</div>
         <textarea class="textarea-field" id="melhorar" placeholder="Seu feedback nos ajuda a crescer..."></textarea>
-        <div class="nav-row"><button class="btn-back" onclick="goBack(5)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" onclick="goNext(5)">Continuar <i class="ti ti-arrow-right"></i></button></div>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(5)">← Voltar</button><button class="btn-next" onclick="goNext(5)">Continuar →</button></div>
       </div>
 
       <!-- Etapa 6: Autorização -->
@@ -281,11 +281,11 @@
         <div class="step-title">Você autorizaria o uso do seu comentário como depoimento?</div>
         <div class="step-sub">Em nossas redes sociais e materiais de divulgação.</div>
         <div class="auth-btns">
-          <button class="auth-btn" id="authSim" onclick="selectAuth('Sim')"><i class="ti ti-check"></i> Sim, autorizo</button>
-          <button class="auth-btn" id="authNao" onclick="selectAuth('Não')"><i class="ti ti-x"></i> Não autorizo</button>
+          <button class="auth-btn" id="authSim" onclick="selectAuth('Sim')">✓ Sim, autorizo</button>
+          <button class="auth-btn" id="authNao" onclick="selectAuth('Não')">✕ Não autorizo</button>
         </div>
         <p class="error-msg" id="err6">Selecione uma opção.</p>
-        <div class="nav-row"><button class="btn-back" onclick="goBack(6)"><i class="ti ti-arrow-left"></i> Voltar</button><button class="btn-next" id="btnEnviar" onclick="enviar()"><i class="ti ti-send"></i> Enviar avaliação</button></div>
+        <div class="nav-row"><button class="btn-back" onclick="goBack(6)">← Voltar</button><button class="btn-next" id="btnEnviar" onclick="enviar()">✉ Enviar avaliação</button></div>
       </div>
 
     </div><!-- /form-body -->
@@ -294,11 +294,12 @@
   <!-- ══ TELA OBRIGADO ══ -->
   <div id="thankWrap" style="display:none">
     <div class="thank-hero">
-      <div class="thank-u-dots"><span></span><span></span></div>
+      
       <span class="thank-u-letter">ü</span>
     </div>
     <div class="thank-body">
-     <div class="thank-badge">Muito obrigado!</div>
+      <div class="thank-badge">Muito obrigada!</div>
+      <div class="thank-title">Obrigado por sua contribuição!</div>
       <div class="thank-desc">Seu feedback é muito valioso para nós. Com ele continuamos crescendo e entregando o melhor resultado em cada processo de recrutamento.</div>
     </div>
     <div class="thank-bar"></div>
@@ -426,7 +427,7 @@ function enviar() {
   };
   var btn = document.getElementById('btnEnviar');
   btn.disabled = true;
-  btn.innerHTML = '<i class="ti ti-loader-2"></i> Enviando...';
+  btn.innerHTML = '⏳ Enviando...';
   fetch(WEBHOOK_URL, {
     method: 'POST',
     mode: 'no-cors',
@@ -441,7 +442,7 @@ function enviar() {
   .catch(function() {
     alert('Erro ao enviar. Verifique sua conexão e tente novamente.');
     btn.disabled = false;
-    btn.innerHTML = '<i class="ti ti-send"></i> Enviar avaliação';
+    btn.innerHTML = '✉ Enviar avaliação';
   });
 }
 </script>
