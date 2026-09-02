@@ -24,8 +24,8 @@
   .field label{display:block;font-size:14px;color:#6b6b80;margin-bottom:.4rem;font-weight:500}
   .field input{width:100%;padding:11px 14px;border:1px solid #D8D6F5;border-radius:10px;font-size:15px;color:#1a1a2e;outline:none;transition:border .15s,box-shadow .15s;background:#fff}
   .field input:focus{border-color:#7F77DD;box-shadow:0 0 0 3px #EEEDFE}
-  .nps-scale{display:flex;gap:8px;flex-wrap:wrap;margin-top:.5rem}
-  .nps-btn{width:54px;height:54px;border-radius:10px;border:1px solid #D8D6F5;background:#fff;cursor:pointer;font-size:17px;font-weight:600;color:#6b6b80;transition:all .15s}
+  .nps-scale{display:flex;gap:6px;flex-wrap:wrap;margin-top:.5rem}
+  .nps-btn{min-width:46px;height:46px;border-radius:10px;border:1px solid #D8D6F5;background:#fff;cursor:pointer;font-size:15px;font-weight:600;color:#6b6b80;transition:all .15s;padding:0 6px}
   .nps-btn:hover{border-color:#7F77DD;color:#7F77DD;background:#EEEDFE}
   .nps-btn.selected{background:#7F77DD;border-color:#7F77DD;color:#fff}
   .nps-labels{display:flex;justify-content:space-between;margin-top:.6rem}
@@ -58,10 +58,13 @@
   .error-msg{font-size:13px;color:#A32D2D;margin-top:.5rem;display:none}
   .thank-card{text-align:center;padding:2rem 1rem}
   .thank-icon{width:64px;height:64px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem}
+  .nps-btn2{min-width:46px;height:46px;border-radius:10px;border:1px solid #D8D6F5;background:#fff;cursor:pointer;font-size:15px;font-weight:600;color:#6b6b80;transition:all .15s;padding:0 6px}
+  .nps-btn2:hover{border-color:#7F77DD;color:#7F77DD;background:#EEEDFE}
+  .nps-btn2.selected{background:#7F77DD;border-color:#7F77DD;color:#fff}
   @media(max-width:500px){
     body{padding:0;align-items:flex-start}
     .card{border-radius:0;box-shadow:none;min-height:100vh;padding:1.5rem 1.25rem}
-    .nps-btn{width:46px;height:46px;font-size:15px}
+    .nps-btn,.nps-btn2{min-width:38px;height:40px;font-size:13px}
     .auth-btns{flex-direction:column}
   }
 </style>
@@ -90,18 +93,23 @@
     </div>
   </div>
 
-  <!-- Etapa 1: NPS -->
+  <!-- Etapa 1: NPS 0–10 -->
   <div id="s1" class="step">
     <div class="step-label">Pergunta 1 de 7</div>
-    <div class="step-title">Em uma escala de 0 a 5, o quanto você recomendaria a Talentus para um amigo ou colega?</div>
-    <div class="step-sub">0 = Não recomendaria de forma alguma &nbsp;·&nbsp; 5 = Recomendaria com certeza</div>
-    <div class="nps-scale">
+    <div class="step-title">Em uma escala de 0 a 10, o quanto você recomendaria a Talentus para um amigo ou colega?</div>
+    <div class="step-sub">0 = Não recomendaria de forma alguma &nbsp;·&nbsp; 10 = Recomendaria com certeza</div>
+    <div class="nps-scale" id="npsScale">
       <button class="nps-btn" onclick="selectNps(0)">0</button>
       <button class="nps-btn" onclick="selectNps(1)">1</button>
       <button class="nps-btn" onclick="selectNps(2)">2</button>
       <button class="nps-btn" onclick="selectNps(3)">3</button>
       <button class="nps-btn" onclick="selectNps(4)">4</button>
       <button class="nps-btn" onclick="selectNps(5)">5</button>
+      <button class="nps-btn" onclick="selectNps(6)">6</button>
+      <button class="nps-btn" onclick="selectNps(7)">7</button>
+      <button class="nps-btn" onclick="selectNps(8)">8</button>
+      <button class="nps-btn" onclick="selectNps(9)">9</button>
+      <button class="nps-btn" onclick="selectNps(10)">10</button>
     </div>
     <div class="nps-labels"><span>Não recomendaria</span><span>Recomendaria com certeza</span></div>
     <p class="error-msg" id="err1">Selecione uma opção.</p>
@@ -128,7 +136,7 @@
     </div>
   </div>
 
-  <!-- Etapa 2b: NOVA — Qualidade dos candidatos -->
+  <!-- Etapa 2b: Qualidade dos candidatos -->
   <div id="s2b" class="step">
     <div class="step-label">Pergunta 3 de 7</div>
     <div class="step-title">Classifique a qualidade dos candidatos apresentados</div>
@@ -149,7 +157,7 @@
     </div>
   </div>
 
-  <!-- Etapa 3: Matriz de avaliação -->
+  <!-- Etapa 3: Matriz -->
   <div id="s3" class="step">
     <div class="step-label">Pergunta 4 de 7</div>
     <div class="step-title">Como você avalia os seguintes aspectos?</div>
@@ -223,17 +231,9 @@
   </div>
 </div>
 
-<style>
-  .nps-btn2{width:54px;height:54px;border-radius:10px;border:1px solid #D8D6F5;background:#fff;cursor:pointer;font-size:17px;font-weight:600;color:#6b6b80;transition:all .15s}
-  .nps-btn2:hover{border-color:#7F77DD;color:#7F77DD;background:#EEEDFE}
-  .nps-btn2.selected{background:#7F77DD;border-color:#7F77DD;color:#fff}
-</style>
-
 <script>
 var state = { nps: null, vaga: null, qualidade_candidatos: null, auth: null };
 var WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwnNwHIrHETLf_ypUyL5ZftYNSJ40Z_bhQ4_GrPi9M_AJF_42Tj29wkvxRxEe9SYr8/exec';
-
-// Ordem das etapas
 var steps = [0, 1, 2, '2b', 3, 4, 5, 6, 7];
 
 function setProgress(stepId) {
