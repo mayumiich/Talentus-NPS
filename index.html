@@ -61,8 +61,8 @@
   .field input{width:100%;padding:11px 14px;border:1.5px solid #e8e8e8;border-radius:10px;font-size:15px;color:#1a1a1a;outline:none;transition:border .15s,box-shadow .15s;background:#fff;font-family:'Inter',sans-serif}
   .field input:focus{border-color:#fe936d;box-shadow:0 0 0 3px rgba(254,147,109,.12)}
 
-  .nps-scale{display:flex;gap:6px;flex-wrap:wrap;margin-top:.5rem}
-  .nps-btn{min-width:46px;height:46px;border-radius:10px;border:1.5px solid #e8e8e8;background:#fff;cursor:pointer;font-size:15px;font-weight:600;color:#555;transition:all .15s;font-family:'Inter',sans-serif;padding:0 4px}
+  .nps-scale{display:flex;gap:4px;flex-wrap:nowrap;margin-top:.5rem;overflow-x:auto;padding-bottom:4px}
+  .nps-btn{min-width:40px;width:40px;height:44px;border-radius:8px;border:1.5px solid #e8e8e8;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:#555;transition:all .15s;font-family:'Inter',sans-serif;padding:0;flex-shrink:0}
   .nps-btn:hover{border-color:#fe936d;color:#fe936d;background:#fff8f5}
   .nps-btn.selected{background:#fe936d;border-color:#fe936d;color:#fff}
   .nps-labels{display:flex;justify-content:space-between;margin-top:.6rem}
@@ -240,13 +240,13 @@
       <!-- Etapa 3: Matriz -->
       <div id="s3" class="step">
         <div class="step-label">Pergunta 4 de 7</div>
-        <div class="step-title">Como você avalia os seguintes aspectos?</div>
+        <div class="step-title">Como você avalia os seguintes pontos da Consultora de RH que te atendeu?</div>
         <div class="step-sub">Escala de 1 (ruim) a 5 (excelente)</div>
         <table class="matrix-table">
           <thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
           <tbody>
             <tr><td>Qualidade do serviço</td><td><input class="matrix-radio" type="radio" name="m1" value="1"></td><td><input class="matrix-radio" type="radio" name="m1" value="2"></td><td><input class="matrix-radio" type="radio" name="m1" value="3"></td><td><input class="matrix-radio" type="radio" name="m1" value="4"></td><td><input class="matrix-radio" type="radio" name="m1" value="5"></td></tr>
-            <tr><td>Atendimento da equipe</td><td><input class="matrix-radio" type="radio" name="m2" value="1"></td><td><input class="matrix-radio" type="radio" name="m2" value="2"></td><td><input class="matrix-radio" type="radio" name="m2" value="3"></td><td><input class="matrix-radio" type="radio" name="m2" value="4"></td><td><input class="matrix-radio" type="radio" name="m2" value="5"></td></tr>
+            <tr><td>Atendimento</td><td><input class="matrix-radio" type="radio" name="m2" value="1"></td><td><input class="matrix-radio" type="radio" name="m2" value="2"></td><td><input class="matrix-radio" type="radio" name="m2" value="3"></td><td><input class="matrix-radio" type="radio" name="m2" value="4"></td><td><input class="matrix-radio" type="radio" name="m2" value="5"></td></tr>
             <tr><td>Agilidade nas respostas</td><td><input class="matrix-radio" type="radio" name="m3" value="1"></td><td><input class="matrix-radio" type="radio" name="m3" value="2"></td><td><input class="matrix-radio" type="radio" name="m3" value="3"></td><td><input class="matrix-radio" type="radio" name="m3" value="4"></td><td><input class="matrix-radio" type="radio" name="m3" value="5"></td></tr>
             <tr><td>Clareza na comunicação</td><td><input class="matrix-radio" type="radio" name="m4" value="1"></td><td><input class="matrix-radio" type="radio" name="m4" value="2"></td><td><input class="matrix-radio" type="radio" name="m4" value="3"></td><td><input class="matrix-radio" type="radio" name="m4" value="4"></td><td><input class="matrix-radio" type="radio" name="m4" value="5"></td></tr>
             <tr><td>Resultado entregue</td><td><input class="matrix-radio" type="radio" name="m5" value="1"></td><td><input class="matrix-radio" type="radio" name="m5" value="2"></td><td><input class="matrix-radio" type="radio" name="m5" value="3"></td><td><input class="matrix-radio" type="radio" name="m5" value="4"></td><td><input class="matrix-radio" type="radio" name="m5" value="5"></td></tr>
@@ -268,8 +268,8 @@
       <!-- Etapa 5: Melhorar -->
       <div id="s5" class="step">
         <div class="step-label">Pergunta 6 de 7</div>
-        <div class="step-title">Existe algo que poderíamos fazer melhor?</div>
-        <div class="step-sub">Opcional — seu feedback honesto nos ajuda a crescer.</div>
+        <div class="step-title">Para finalizar, existe algo que poderíamos fazer melhor?</div>
+        <div class="step-sub">Opcional — seu feedback nos ajuda a crescer e melhorar a sua experiência e resultados conosco!</div>
         <textarea class="textarea-field" id="melhorar" placeholder="Seu feedback nos ajuda a crescer..."></textarea>
         <div class="nav-row"><button class="btn-back" onclick="goBack(5)">← Voltar</button><button class="btn-next" onclick="goNext(5)">Continuar →</button></div>
       </div>
@@ -362,6 +362,11 @@ function goNext(current) {
     document.getElementById('err3').style.display = 'none';
   }
   if (current === 6) return;
+  // Se saindo da etapa 5 (melhorar) e NPS < 8, pula a etapa 6 (autorização)
+  if (current === 5 && state.nps !== null && state.nps < 8) {
+    enviarDireto();
+    return;
+  }
   var idx = steps.indexOf(current);
   showStep(steps[idx + 1]);
 }
@@ -399,6 +404,11 @@ function selectAuth(val) {
   document.getElementById('authNao').classList.toggle('selected', val === 'Não');
 }
 
+function enviarDireto() {
+  state.auth = 'Não autorizado (NPS < 8)';
+  enviar();
+}
+
 function enviar() {
   if (!state.auth) { document.getElementById('err6').style.display = 'block'; return; }
   document.getElementById('err6').style.display = 'none';
@@ -427,7 +437,7 @@ function enviar() {
   var btn = document.getElementById('btnEnviar');
   btn.disabled = true;
   btn.innerHTML = '⏳ Enviando...';
-    document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('formWrap').style.display = 'none';
   document.getElementById('thankWrap').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
